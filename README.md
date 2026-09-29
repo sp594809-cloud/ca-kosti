@@ -130,3 +130,4 @@ Before handing over to the final client:
 2. **Admin Credentials:** Initialized default admin account securely in SQLite using `bcrypt` password hashing on first run.
 3. **Compliance Dates:** Seeded standard Indian tax and corporate compliance dates, marked with mandatory statutory disclaimer "sample, verify".
 # ca-kosti
+# ca-kosti
