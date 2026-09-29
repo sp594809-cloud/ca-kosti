@@ -1,0 +1,55 @@
+{
+  "firmName": "Koshti & Company",
+  "shortName": "Koshti & Co.",
+  "tagline": "Chartered Accountants | Audit, Taxation & Corporate Compliance",
+  "icaiFirmRegNo": "142857W",
+  "yearEstablished": "2015",
+  "address": "506, 5th Floor, Magnet Square, Near Bank of India, Sardar Chowk, New Ranip",
+  "city": "Ahmedabad, Gujarat - 382480",
+  "mapEmbedUrl": "https://maps.google.com/maps?q=Magnet+Square+New+Ranip+Ahmedabad&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  "phones": [
+    "+91 98765 43210",
+    "+91 079 2750 0000"
+  ],
+  "email": "contact@koshtico.in",
+  "whatsapp": "919876543210",
+  "workingHours": "Monday – Saturday: 10:00 AM – 7:00 PM (Sunday Closed)",
+  "heroBgImage": "/uploads/koshti-and-co-chartered-accountant-ranip-ahmedabad-ca-6hrfa6ls3h-1790681250641.jpg",
+  "officePhoto": "/uploads/koshti-and-co-chartered-accountant-ranip-ahmedabad-ca-bn64mxp454-1790682230531.jpg",
+  "partners": [
+    {
+      "id": "partner-1",
+      "name": "CA Bhavik Koshti",
+      "qualification": "B.Com, FCA, DISA (ICAI)",
+      "membershipNo": "164821",
+      "photo": "/uploads/koshti-and-co-chartered-accountant-ranip-ahmedabad-ca-6hrfa6ls3h-1790681250641.jpg",
+      "bio": "Fellow member of the Institute of Chartered Accountants of India with over 10 years of experience specializing in Statutory Audit, Direct Taxation, and Corporate Advisory."
+    },
+    {
+      "id": "partner-2",
+      "name": "CA Priyank Patel",
+      "qualification": "B.Com, ACA",
+      "membershipNo": "189432",
+      "photo": "",
+      "bio": "Associate member of ICAI focusing on Goods & Services Tax (GST) compliance, litigation representation, and ROC secretarial matters."
+    }
+  ],
+  "servicesList": [
+    "Statutory & Internal Audit",
+    "Goods & Services Tax (GST)",
+    "Income Tax & International Tax",
+    "Company & LLP Incorporation",
+    "ROC Compliance & Filings",
+    "Accounting & Financial Reporting",
+    "Startup Advisory & Valuation",
+    "TDS & Payroll Compliance"
+  ],
+  "themeColors": {
+    "primary": "#0B2545",
+    "secondary": "#5B6B7F",
+    "background": "#F7F9FC",
+    "accent": "#B8965A"
+  },
+  "logoText": "Koshti & Co.",
+  "demoMode": true
+}

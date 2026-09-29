@@ -1,0 +1,29 @@
+{
+  "name": "koshti-and-company-ca",
+  "version": "1.0.0",
+  "description": "Professional ICAI Compliant Website for Koshti & Company, Chartered Accountants",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "keywords": [
+    "chartered-accountant",
+    "icai-compliant",
+    "express",
+    "sqlite",
+    "ahmedabad"
+  ],
+  "author": "Antigravity",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.8.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0"
+  }
+}

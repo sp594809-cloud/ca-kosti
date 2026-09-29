@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koshti & Company | Chartered Accountants | New Ranip, Ahmedabad</title>
+  <meta name="description" content="Koshti & Company is a Chartered Accountant firm in New Ranip, Ahmedabad providing Statutory Audit, GST Compliance, Direct Taxation, and Corporate Secretarial Services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Shared Site Header -->
+  <div id="site-header"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">ICAI Registered Practice • FRN 142857W</span>
+        <h1>Koshti & Company</h1>
+        <p>Chartered Accountant Practice rendering Audit, Indirect & Direct Taxation, Corporate Law Compliance, and Business Advisory services in Ahmedabad.</p>
+        <div class="hero-actions">
+          <a href="/services.html" class="btn btn-primary">View Services</a>
+          <a href="/contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factual Information Strip -->
+  <section class="fact-strip">
+    <div class="container">
+      <div class="fact-grid">
+        <div class="fact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+          <span>Established: <strong>2015</strong></span>
+        </div>
+        <div class="fact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>ICAI FRN: <strong>142857W</strong></span>
+        </div>
+        <div class="fact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>Location: <strong>New Ranip, Ahmedabad</strong></span>
+        </div>
+        <div class="fact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Hours: <strong>Mon - Sat 10:00 AM - 7:00 PM</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Services Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Practice Areas & Services</h2>
+        <p>Comprehensive accounting, audit, and tax compliance services tailored for individuals, partnerships, startups, and corporate entities.</p>
+      </div>
+
+      <div class="grid-3" id="home-services-grid">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <a href="/services.html" class="btn btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Compliance Due Dates Widget -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Upcoming Compliance Due Dates</h2>
+        <p>Statutory deadlines for Income Tax, Goods & Services Tax (GST), TDS, and ROC filings.</p>
+      </div>
+
+      <div class="due-table-wrapper" style="margin-bottom: 1.5rem;">
+        <table class="due-table">
+          <thead>
+            <tr>
+              <th>Compliance Description</th>
+              <th>Due Date</th>
+              <th>Category</th>
+              <th>Statutory Authority</th>
+              <th>Status Note</th>
+            </tr>
+          </thead>
+          <tbody id="home-due-dates-body">
+            <!-- Dynamically rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span style="font-size: 0.85rem; color: #64748B;">* Statutory dates are subject to official notifications. Always verify on official portals (incometax.gov.in, gst.gov.in, mca.gov.in).</span>
+        <a href="/due-dates.html" class="btn btn-outline btn-sm">Full Due Dates Schedule</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Partner Profiles</h2>
+        <p>Qualified Chartered Accountants registered with the Institute of Chartered Accountants of India.</p>
+      </div>
+
+      <div class="grid-3" id="home-partners-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles & Updates Section -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Articles & Technical Updates</h2>
+        <p>Informative guides on regulatory compliance, direct tax provisions, and corporate filings.</p>
+      </div>
+
+      <div class="grid-3" id="home-articles-grid">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <a href="/updates.html" class="btn btn-outline">Read All Articles</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Home Contact Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact Office</h2>
+        <p>Reach out for professional appointments or document submission.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;" class="contact-grid-container">
+        <!-- Contact Info & Map -->
+        <div>
+          <h3 style="margin-bottom: 1rem;">Registered Office Details</h3>
+          <p><strong>Koshti & Company</strong><br />Chartered Accountants</p>
+          <p class="text-muted" style="margin-bottom: 1.5rem;">
+            506, 5th Floor, Magnet Square,<br />
+            Near Bank of India, Sardar Chowk,<br />
+            New Ranip, Ahmedabad, Gujarat - 382480
+          </p>
+
+          <p style="margin-bottom: 0.5rem;"><strong>Telephone:</strong> +91 98765 43210 / +91 079 2750 0000</p>
+          <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> contact@koshtico.in</p>
+          <p style="margin-bottom: 1.5rem;"><strong>Hours:</strong> Monday – Saturday: 10:00 AM – 7:00 PM</p>
+
+          <div style="border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-color); height: 230px;">
+            <iframe src="https://maps.google.com/maps?q=Magnet+Square+New+Ranip+Ahmedabad&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div style="background: var(--white); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+          <h3 style="margin-bottom: 1.25rem;">Send Professional Enquiry</h3>
+          
+          <div id="home-contact-success" class="form-success-msg"></div>
+
+          <form id="home-contact-form">
+            <!-- Hidden Spam Honeypot -->
+            <input type="text" name="website_hp" class="website-hp-field" tabindex="-1" autocomplete="off" />
+
+            <div class="form-group">
+              <label class="form-label" for="home-name">Full Name <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="home-name" class="form-control" placeholder="Enter your full name" required />
+              <div id="err-home-name" class="form-error"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="home-phone">Mobile Number <span style="color:#DC2626;">*</span></label>
+                <input type="tel" id="home-phone" class="form-control" placeholder="10-digit mobile number" required />
+                <div id="err-home-phone" class="form-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="home-email">Email Address</label>
+                <input type="email" id="home-email" class="form-control" placeholder="name@example.com" />
+                <div id="err-home-email" class="form-error"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="home-subject">Service Subject <span style="color:#DC2626;">*</span></label>
+              <select id="home-subject" class="form-control" required>
+                <option value="">-- Select Practice Area --</option>
+                <option value="ITR Filing (individuals & businesses)">Income Tax Return (ITR) Filing</option>
+                <option value="GST Registration & Returns">GST Registration & Returns</option>
+                <option value="Income Tax Notice Replies">Income Tax Notice Replies</option>
+                <option value="Company & LLP Registration">Company & LLP Incorporation</option>
+                <option value="ROC Compliance & Annual Filings">ROC Compliance & Annual Filings</option>
+                <option value="Statutory Audit">Statutory & Internal Audit</option>
+                <option value="Tax Audit">Tax Audit under Sec 44AB</option>
+                <option value="Accounting & Bookkeeping">Accounting & Bookkeeping</option>
+                <option value="Startup Registration & Compliance">Startup Advisory & Registration</option>
+                <option value="NRI Taxation">NRI Taxation & 15CA/CB</option>
+                <option value="Net Worth & Other Certifications">Net Worth Certifications</option>
+                <option value="TDS Returns">TDS Return Filings</option>
+              </select>
+              <div id="err-home-subject" class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="home-message">Enquiry Message <span style="color:#DC2626;">*</span> (Max 500 chars)</label>
+              <textarea id="home-message" class="form-control" maxlength="500" placeholder="Please outline your specific requirement..." required></textarea>
+              <div id="err-home-message" class="form-error"></div>
+            </div>
+
+            <button type="submit" id="home-submit-btn" class="btn btn-primary" style="width: 100%; background:#25D366; border-color:#25D366;">Send Enquiry on WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Site Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Client JavaScript -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Fetch Services for Home Grid
+      fetch('/api/services')
+        .then(res => res.json())
+        .then(data => {
+          const grid = document.getElementById('home-services-grid');
+          if (!grid) return;
+          const services = (data.services || []).slice(0, 6);
+          grid.innerHTML = services.map(s => `
+            <div class="card">
+              <div class="card-icon">${getServiceSvgIcon(s.icon)}</div>
+              <h3 class="card-title">${s.title}</h3>
+              <p class="card-body">${s.short_desc}</p>
+              <a href="/service.html?s=${s.slug}" class="card-link">
+                Read Details 
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+          `).join('');
+        });
+
+      // 2. Fetch Due Dates Widget
+      fetch('/api/due-dates?limit=5')
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById('home-due-dates-body');
+          if (!tbody) return;
+          const dueDates = data.dueDates || [];
+          tbody.innerHTML = dueDates.map(d => {
+            const dateFormatted = new Date(d.due_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            return `
+              <tr>
+                <td><strong>${d.title}</strong><br /><small class="text-muted">${d.description}</small></td>
+                <td style="font-weight: 600; color: #0B2545;">${dateFormatted}</td>
+                <td><span class="badge-tag">${d.category}</span></td>
+                <td>${d.authority}</td>
+                <td><span class="badge-verify">Sample, Verify</span></td>
+              </tr>
+            `;
+          }).join('');
+        });
+
+      // 3. Fetch Config & Partners for Home Section
+      fetch('/api/config')
+        .then(res => res.json())
+        .then(data => {
+          const config = data.config || {};
+          
+          // Apply Hero Background Image if configured
+          if (config.heroBgImage) {
+            const heroEl = document.querySelector('.hero');
+            if (heroEl) {
+              heroEl.style.setProperty('--hero-bg-img', `url('${config.heroBgImage}')`);
+            }
+          }
+
+          const grid = document.getElementById('home-partners-grid');
+          if (!grid) return;
+          const partners = config.partners || [];
+          grid.innerHTML = partners.map(p => {
+            const hasPhoto = p.photo && p.photo.trim().length > 0;
+            const avatarHtml = hasPhoto 
+              ? `<img src="${p.photo}" alt="${p.name}" onerror="this.outerHTML='${p.name.replace('CA ', '').charAt(0)}'" />` 
+              : p.name.replace('CA ', '').charAt(0);
+            return `
+              <div class="partner-card">
+                <div class="partner-avatar">${avatarHtml}</div>
+                <div class="partner-info">
+                  <h3>${p.name}</h3>
+                  <div class="partner-meta">${p.qualification} • ICAI Mem No: ${p.membershipNo}</div>
+                  <p style="font-size: 0.9rem; color: #5B6B7F;">${p.bio}</p>
+                </div>
+              </div>
+            `;
+          }).join('');
+        });
+
+      // 4. Fetch Articles for Home Section
+      fetch('/api/articles?limit=3')
+        .then(res => res.json())
+        .then(data => {
+          const grid = document.getElementById('home-articles-grid');
+          if (!grid) return;
+          const articles = data.articles || [];
+          grid.innerHTML = articles.map(a => {
+            const publishedDate = new Date(a.published_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            return `
+              <div class="card">
+                <div style="margin-bottom: 0.75rem;">
+                  <span class="badge-tag">${a.category}</span>
+                  <small style="color: #64748B; margin-left: 8px;">${publishedDate}</small>
+                </div>
+                <h3 class="card-title" style="font-size: 1.1rem;">${a.title}</h3>
+                <p class="card-body" style="font-size: 0.9rem;">${a.excerpt}</p>
+                <a href="/article.html?a=${a.slug}" class="card-link">Read Full Article &rarr;</a>
+              </div>
+            `;
+          }).join('');
+        });
+
+      // 5. Contact Form Submission Handler
+      const form = document.getElementById('home-contact-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const name = document.getElementById('home-name').value.trim();
+          const phone = document.getElementById('home-phone').value.trim();
+          const email = document.getElementById('home-email').value.trim();
+          const subject = document.getElementById('home-subject').value.trim();
+          const message = document.getElementById('home-message').value.trim();
+          const hp = form.querySelector('[name="website_hp"]').value;
+          const submitBtn = document.getElementById('home-submit-btn');
+          const successBox = document.getElementById('home-contact-success');
+
+          // Reset errors
+          document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
+          successBox.style.display = 'none';
+
+          // Basic Client Validation
+          let isValid = true;
+
+          if (name.length < 2) {
+            document.getElementById('err-home-name').textContent = 'Please enter your full name.';
+            document.getElementById('err-home-name').style.display = 'block';
+            isValid = false;
+          }
+
+          const cleanPhone = phone.replace(/[\s\-\+\(\)]/g, '');
+          if (!/^(?:91)?[6789]\d{9}$/.test(cleanPhone)) {
+            document.getElementById('err-home-phone').textContent = 'Enter a valid 10-digit Indian mobile number.';
+            document.getElementById('err-home-phone').style.display = 'block';
+            isValid = false;
+          }
+
+          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('err-home-email').textContent = 'Enter a valid email address.';
+            document.getElementById('err-home-email').style.display = 'block';
+            isValid = false;
+          }
+
+          if (!subject) {
+            document.getElementById('err-home-subject').textContent = 'Please select a service.';
+            document.getElementById('err-home-subject').style.display = 'block';
+            isValid = false;
+          }
+
+          if (message.length < 5) {
+            document.getElementById('err-home-message').textContent = 'Message must be at least 5 characters.';
+            document.getElementById('err-home-message').style.display = 'block';
+            isValid = false;
+          }
+
+          if (!isValid) return;
+
+          // Open WhatsApp with pre-filled enquiry (no database save)
+          const waText = [
+            'Hello Koshti & Company,',
+            '',
+            'I would like to make an enquiry.',
+            '',
+            `*Name:* ${name}`,
+            `*Phone:* ${phone}`,
+            email ? `*Email:* ${email}` : null,
+            `*Service:* ${subject}`,
+            `*Message:* ${message}`
+          ].filter(Boolean).join('\n');
+
+          const openWhatsApp = (waNumber) => {
+            const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+            window.open(url, '_blank');
+            form.reset();
+            successBox.textContent = 'Opening WhatsApp… Please send the message to complete your enquiry.';
+            successBox.style.display = 'block';
+          };
+
+          // Prefer number from config; fall back to firm default
+          fetch('/api/config')
+            .then(res => res.json())
+            .then(data => {
+              const wa = (data.config && data.config.whatsapp) || '919876543210';
+              openWhatsApp(wa);
+            })
+            .catch(() => openWhatsApp('919876543210'));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Koshti & Company Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body { background-color: #F1F5F9; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* Sidebar */
+    .admin-sidebar {
+      width: 250px;
+      background-color: var(--primary);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 1rem 0;
+    }
+
+    .sidebar-item a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      color: #94A3B8;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .sidebar-item a:hover, .sidebar-item.active a {
+      color: #fff;
+      background-color: rgba(255,255,255,0.08);
+      border-left: 4px solid var(--accent);
+    }
+
+    .admin-content {
+      flex-grow: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .admin-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    .admin-panel-section {
+      display: none;
+    }
+
+    .admin-panel-section.active {
+      display: block;
+    }
+
+    /* Modal Overlay for Admin Forms */
+    .admin-modal {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(11, 37, 69, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 1rem;
+    }
+
+    .admin-modal.open {
+      display: flex;
+    }
+
+    .admin-modal-content {
+      background: #fff;
+      border-radius: 8px;
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <div>
+          <div style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700;">Koshti & Co.</div>
+          <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Admin Portal</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active"><a href="#" data-section="sec-dashboard"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-enquiries"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Enquiries</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-articles"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Articles</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-due-dates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Due Dates</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-services"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> Services</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-firm-config"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Firm Details</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-photos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> Photos Manager</a></li>
+        <li class="sidebar-item"><a href="#" data-section="sec-account"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Account Settings</a></li>
+      </ul>
+
+      <div style="margin-top: auto; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <a href="/index.html" target="_blank" style="color: #94A3B8; font-size: 0.85rem; display: block; margin-bottom: 0.75rem;">&rarr; View Public Site</a>
+        <button id="admin-logout-btn" class="btn btn-secondary btn-sm" style="width: 100%; background: rgba(255,255,255,0.1); border: none;">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Body -->
+    <main class="admin-content">
+      <!-- Top Bar -->
+      <div class="admin-header-bar">
+        <div>
+          <h2 id="section-title" style="font-size: 1.5rem; margin-bottom: 0.2rem;">Dashboard</h2>
+          <span style="font-size: 0.85rem; color: #64748B;">Koshti & Company Administration Console</span>
+        </div>
+        <div>
+          <span class="badge-tag" style="background: #DEF7EC; color: #03543F;">Session Active</span>
+        </div>
+      </div>
+
+      <!-- SECTION 1: DASHBOARD -->
+      <section id="sec-dashboard" class="admin-panel-section active">
+        <div class="grid-4" style="margin-bottom: 2rem;">
+          <div class="stat-card">
+            <div style="color: var(--secondary); font-size: 0.9rem; font-weight: 500;">New Enquiries</div>
+            <div class="stat-number" id="dash-new-count" style="color: #D97706;">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="color: var(--secondary); font-size: 0.9rem; font-weight: 500;">Total Enquiries</div>
+            <div class="stat-number" id="dash-total-count">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="color: var(--secondary); font-size: 0.9rem; font-weight: 500;">Published Articles</div>
+            <div class="stat-number" id="dash-articles-count">0</div>
+          </div>
+          <div class="stat-card">
+            <div style="color: var(--secondary); font-size: 0.9rem; font-weight: 500;">Upcoming Due Dates</div>
+            <div class="stat-number" id="dash-duedates-count">0</div>
+          </div>
+        </div>
+
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+          <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Recent Client Enquiries</h3>
+          <div class="due-table-wrapper">
+            <table class="due-table">
+              <thead>
+                <tr>
+                  <th>Client Name</th>
+                  <th>Phone</th>
+                  <th>Subject</th>
+                  <th>Status</th>
+                  <th>Date Received</th>
+                </tr>
+              </thead>
+              <tbody id="dash-recent-enquiries">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: ENQUIRIES MANAGEMENT -->
+      <section id="sec-enquiries" class="admin-panel-section">
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; flex-grow: 1; max-width: 600px;">
+              <input type="text" id="enq-search" class="form-control" placeholder="Search by name, phone, email, subject..." />
+              <select id="enq-status-filter" class="form-control" style="width: 160px;">
+                <option value="All">All Statuses</option>
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+            <a href="/api/admin/enquiries/export" target="_blank" class="btn btn-outline btn-sm">Export to CSV</a>
+          </div>
+
+          <div class="due-table-wrapper">
+            <table class="due-table">
+              <thead>
+                <tr>
+                  <th>Client Particulars</th>
+                  <th>Subject & Message</th>
+                  <th>Quick Connect</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="enquiries-table-body">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: ARTICLES MANAGEMENT -->
+      <section id="sec-articles" class="admin-panel-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Articles & Technical Updates</h3>
+          <button id="btn-create-article" class="btn btn-primary btn-sm">+ Create New Article</button>
+        </div>
+
+        <div class="due-table-wrapper">
+          <table class="due-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Published Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="articles-table-body">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 4: DUE DATES MANAGEMENT -->
+      <section id="sec-due-dates" class="admin-panel-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Compliance Schedule Due Dates</h3>
+          <button id="btn-create-duedate" class="btn btn-primary btn-sm">+ Add New Due Date</button>
+        </div>
+
+        <div class="due-table-wrapper">
+          <table class="due-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Due Date</th>
+                <th>Category</th>
+                <th>Authority</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="duedates-table-body">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 5: SERVICES MANAGEMENT -->
+      <section id="sec-services" class="admin-panel-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>Practice Services Offered</h3>
+          <button id="btn-create-service" class="btn btn-primary btn-sm">+ Add New Service</button>
+        </div>
+
+        <div class="due-table-wrapper">
+          <table class="due-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="services-table-body">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 6: FIRM DETAILS & PARTNERS CONFIG -->
+      <section id="sec-firm-config" class="admin-panel-section">
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-sm); max-width: 850px;">
+          <h3 style="margin-bottom: 1.5rem;">Edit Firm Configuration (firm.json)</h3>
+          
+          <form id="firm-config-form">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label">Firm Full Name</label>
+                <input type="text" id="cfg-firmName" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Short Name / Logo Text</label>
+                <input type="text" id="cfg-shortName" class="form-control" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label">ICAI Firm Reg No (FRN)</label>
+                <input type="text" id="cfg-frn" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Year Established</label>
+                <input type="text" id="cfg-year" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Address</label>
+              <input type="text" id="cfg-address" class="form-control" required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label">City / State / Pincode</label>
+                <input type="text" id="cfg-city" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="cfg-email" class="form-control" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label">Primary Phone</label>
+                <input type="text" id="cfg-phone1" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp Number (e.g. 919876543210)</label>
+                <input type="text" id="cfg-whatsapp" class="form-control" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label">Hero Section Background Photo URL</label>
+                <input type="text" id="cfg-heroBg" class="form-control" placeholder="e.g. /uploads/hero-bg.jpg" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Office Building Photo URL</label>
+                <input type="text" id="cfg-officePhoto" class="form-control" placeholder="e.g. /uploads/office.jpg" />
+              </div>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-color); margin: 1.5rem 0; padding-top: 1.5rem;">
+              <h4 style="margin-bottom: 1rem; color: var(--primary);">Partner Profiles & Photos</h4>
+              
+              <div style="background: #F8FAFC; border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                <strong style="color: var(--primary);">Partner 1: CA Bhavik Koshti</strong>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                  <div>
+                    <label class="form-label" style="font-size: 0.82rem;">Membership No.</label>
+                    <input type="text" id="cfg-p1-mem" class="form-control" placeholder="164821" />
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size: 0.82rem;">Photo URL (e.g., /uploads/partner-1.jpg)</label>
+                    <input type="text" id="cfg-p1-photo" class="form-control" placeholder="/uploads/filename.jpg" />
+                  </div>
+                </div>
+              </div>
+
+              <div style="background: #F8FAFC; border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                <strong style="color: var(--primary);">Partner 2: CA Priyank Patel</strong>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                  <div>
+                    <label class="form-label" style="font-size: 0.82rem;">Membership No.</label>
+                    <input type="text" id="cfg-p2-mem" class="form-control" placeholder="189432" />
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size: 0.82rem;">Photo URL (e.g., /uploads/partner-2.jpg)</label>
+                    <input type="text" id="cfg-p2-photo" class="form-control" placeholder="/uploads/filename.jpg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox" id="cfg-demoMode" />
+                <strong>Enable Demo Mode (Adds noindex meta tag & preview footer line)</strong>
+              </label>
+            </div>
+
+            <button type="submit" id="cfg-save-btn" class="btn btn-primary" style="margin-top: 1rem;">Save Firm Configuration</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SECTION 7: PHOTOS MANAGER -->
+      <section id="sec-photos" class="admin-panel-section">
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-sm); max-width: 850px; margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem;">Upload Image Asset</h3>
+          <form id="upload-photo-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <label class="form-label">Select Photo (JPG, PNG, WEBP max 5MB)</label>
+              <input type="file" id="photo-file-input" class="form-control" accept="image/*" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Upload Photo</button>
+          </form>
+        </div>
+
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-sm);">
+          <h3 style="margin-bottom: 1.5rem;">Uploaded Image Library</h3>
+          <div class="grid-4" id="photos-grid">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: ACCOUNT SETTINGS -->
+      <section id="sec-account" class="admin-panel-section">
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-sm); max-width: 500px;">
+          <h3 style="margin-bottom: 1.5rem;">Change Admin Password</h3>
+          <form id="change-pass-form">
+            <div class="form-group">
+              <label class="form-label">Current Password</label>
+              <input type="password" id="pass-current" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">New Password (Min 6 chars)</label>
+              <input type="password" id="pass-new" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ARTICLE MODAL -->
+  <div class="admin-modal" id="modal-article">
+    <div class="admin-modal-content">
+      <h3 id="art-modal-title" style="margin-bottom: 1.25rem;">Create / Edit Article</h3>
+      <form id="form-article">
+        <input type="hidden" id="art-id" />
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" id="art-form-title" class="form-control" required />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" id="art-form-cat" class="form-control" required placeholder="e.g. GST & Indirect Tax" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select id="art-form-status" class="form-control">
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Excerpt (Summary)</label>
+          <textarea id="art-form-excerpt" class="form-control" style="min-height:70px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Body Text (Markdown / HTML)</label>
+          <textarea id="art-form-body" class="form-control" style="min-height:200px;" required></textarea>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+          <button type="button" onclick="closeAdminModals()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DUE DATE MODAL -->
+  <div class="admin-modal" id="modal-duedate">
+    <div class="admin-modal-content">
+      <h3 id="due-modal-title" style="margin-bottom: 1.25rem;">Add / Edit Compliance Due Date</h3>
+      <form id="form-duedate">
+        <input type="hidden" id="due-id" />
+        <div class="form-group">
+          <label class="form-label">Title / Form Name</label>
+          <input type="text" id="due-form-title" class="form-control" required placeholder="e.g. GSTR-3B Monthly Return" />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Due Date (YYYY-MM-DD)</label>
+            <input type="date" id="due-form-date" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="due-form-cat" class="form-control" required>
+              <option value="GST Compliance">GST Compliance</option>
+              <option value="Direct Tax">Direct Tax</option>
+              <option value="ROC Compliance">ROC Compliance</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Authority</label>
+          <input type="text" id="due-form-authority" class="form-control" required placeholder="e.g. GSTN (gst.gov.in)" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description / Note</label>
+          <textarea id="due-form-desc" class="form-control" style="min-height:70px;" required></textarea>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+          <button type="button" onclick="closeAdminModals()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Due Date</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SERVICE MODAL -->
+  <div class="admin-modal" id="modal-service">
+    <div class="admin-modal-content">
+      <h3 id="srv-modal-title" style="margin-bottom: 1.25rem;">Add / Edit Service</h3>
+      <form id="form-service">
+        <input type="hidden" id="srv-id" />
+        <div class="form-group">
+          <label class="form-label">Service Title</label>
+          <input type="text" id="srv-form-title" class="form-control" required />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" id="srv-form-cat" class="form-control" required placeholder="e.g. Direct Tax" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Icon Name</label>
+            <input type="text" id="srv-form-icon" class="form-control" placeholder="file-text, percent, briefcase..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sort Order</label>
+            <input type="number" id="srv-form-order" class="form-control" value="0" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Short Description</label>
+          <textarea id="srv-form-short" class="form-control" style="min-height:60px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Description</label>
+          <textarea id="srv-form-full" class="form-control" style="min-height:120px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Who Needs It?</label>
+          <textarea id="srv-form-who" class="form-control" style="min-height:60px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Documents Required (One per line)</label>
+          <textarea id="srv-form-docs" class="form-control" style="min-height:80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Process Steps (One per line)</label>
+          <textarea id="srv-form-steps" class="form-control" style="min-height:80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 0.5rem;">
+            <input type="checkbox" id="srv-form-active" checked /> Active Service
+          </label>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+          <button type="button" onclick="closeAdminModals()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Service</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

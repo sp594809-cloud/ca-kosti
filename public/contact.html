@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Koshti & Company | Chartered Accountants</title>
+  <meta name="description" content="Contact Koshti & Company Chartered Accountants in New Ranip, Ahmedabad. Address, telephone, email, and Google maps location." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <h1 style="color: #fff; margin-bottom: 0.5rem;">Contact Registered Office</h1>
+      <p style="color: #D0DCEB; font-size: 1.05rem;">Particulars of office location, phone, email, and professional enquiry submission.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;" class="contact-grid-container">
+        
+        <!-- Left: Office Particulars & Map -->
+        <div>
+          <h2 style="font-size: 1.6rem; margin-bottom: 1.25rem;">Office Location & Contact</h2>
+          
+          <div style="background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+            <div id="contact-office-photo-box" style="margin-bottom: 1.25rem; display: none;">
+              <img id="contact-office-img" src="" alt="Koshti & Company Office" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);" />
+            </div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">Koshti & Company</h3>
+            <p style="color: var(--secondary); margin-bottom: 1.25rem; font-size: 0.98rem; line-height: 1.6;">
+              506, 5th Floor, Magnet Square,<br />
+              Near Bank of India, Sardar Chowk,<br />
+              New Ranip, Ahmedabad, Gujarat - 382480
+            </p>
+
+            <div style="font-size: 0.95rem; line-height: 1.8;">
+              <p style="margin-bottom: 0.4rem;"><strong>FRN:</strong> 142857W</p>
+              <p style="margin-bottom: 0.4rem;"><strong>Telephone:</strong> <a href="tel:+919876543210">+91 98765 43210</a> / <a href="tel:+9107927500000">+91 079 2750 0000</a></p>
+              <p style="margin-bottom: 0.4rem;"><strong>Email:</strong> <a href="mailto:contact@koshtico.in">contact@koshtico.in</a></p>
+              <p style="margin-bottom: 0.4rem;"><strong>WhatsApp:</strong> <a href="https://wa.me/919876543210" target="_blank" rel="noopener">+91 98765 43210</a></p>
+              <p style="margin-bottom: 0;"><strong>Working Hours:</strong> Monday – Saturday: 10:00 AM – 7:00 PM</p>
+            </div>
+          </div>
+
+          <div style="border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-color); height: 280px; box-shadow: var(--shadow-sm);">
+            <iframe src="https://maps.google.com/maps?q=Magnet+Square+New+Ranip+Ahmedabad&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form -->
+        <div style="background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2.25rem; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.6rem; margin-bottom: 0.5rem;">Send Professional Enquiry</h2>
+          <p class="text-muted" style="font-size: 0.92rem; margin-bottom: 1.5rem;">Fill out the form below for professional appointments or queries.</p>
+
+          <div id="page-contact-success" class="form-success-msg"></div>
+
+          <form id="page-contact-form">
+            <!-- Honeypot -->
+            <input type="text" name="website_hp" class="website-hp-field" tabindex="-1" autocomplete="off" />
+
+            <div class="form-group">
+              <label class="form-label" for="cnt-name">Full Name <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="cnt-name" class="form-control" placeholder="Your full name" required />
+              <div id="err-cnt-name" class="form-error"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="cnt-phone">Mobile Number <span style="color:#DC2626;">*</span></label>
+                <input type="tel" id="cnt-phone" class="form-control" placeholder="10-digit Indian mobile" required />
+                <div id="err-cnt-phone" class="form-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cnt-email">Email Address</label>
+                <input type="email" id="cnt-email" class="form-control" placeholder="name@example.com" />
+                <div id="err-cnt-email" class="form-error"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cnt-subject">Service Subject <span style="color:#DC2626;">*</span></label>
+              <select id="cnt-subject" class="form-control" required>
+                <option value="">-- Select Service Subject --</option>
+                <option value="ITR Filing (individuals & businesses)">Income Tax Return (ITR) Filing</option>
+                <option value="GST Registration & Returns">GST Registration & Returns</option>
+                <option value="Income Tax Notice Replies">Income Tax Notice Replies</option>
+                <option value="Company & LLP Registration">Company & LLP Incorporation</option>
+                <option value="ROC Compliance & Annual Filings">ROC Compliance & Annual Filings</option>
+                <option value="Statutory Audit">Statutory & Internal Audit</option>
+                <option value="Tax Audit">Tax Audit under Sec 44AB</option>
+                <option value="Accounting & Bookkeeping">Accounting & Bookkeeping</option>
+                <option value="Startup Registration & Compliance">Startup Advisory & Registration</option>
+                <option value="NRI Taxation">NRI Taxation & 15CA/CB</option>
+                <option value="Net Worth & Other Certifications">Net Worth Certifications</option>
+                <option value="TDS Returns">TDS Return Filings</option>
+              </select>
+              <div id="err-cnt-subject" class="form-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cnt-message">Message <span style="color:#DC2626;">*</span> (Max 500 chars)</label>
+              <textarea id="cnt-message" class="form-control" maxlength="500" placeholder="Please describe your specific query..." required></textarea>
+              <div id="err-cnt-message" class="form-error"></div>
+            </div>
+
+            <button type="submit" id="cnt-submit-btn" class="btn btn-primary" style="width:100%; background:#25D366; border-color:#25D366;">Send Message on WhatsApp</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load Office Photo if configured
+      fetch('/api/config')
+        .then(res => res.json())
+        .then(data => {
+          const config = data.config || {};
+          if (config.officePhoto) {
+            const photoBox = document.getElementById('contact-office-photo-box');
+            const photoImg = document.getElementById('contact-office-img');
+            if (photoBox && photoImg) {
+              photoImg.src = config.officePhoto;
+              photoBox.style.display = 'block';
+            }
+          }
+        });
+
+      // Pre-select subject if passed in URL query ?subject=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const preSubject = urlParams.get('subject');
+      if (preSubject) {
+        const selectEl = document.getElementById('cnt-subject');
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value.toLowerCase().includes(preSubject.toLowerCase())) {
+            selectEl.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      const form = document.getElementById('page-contact-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById('cnt-name').value.trim();
+          const phone = document.getElementById('cnt-phone').value.trim();
+          const email = document.getElementById('cnt-email').value.trim();
+          const subject = document.getElementById('cnt-subject').value.trim();
+          const message = document.getElementById('cnt-message').value.trim();
+          const hp = form.querySelector('[name="website_hp"]').value;
+          const submitBtn = document.getElementById('cnt-submit-btn');
+          const successBox = document.getElementById('page-contact-success');
+
+          document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
+          successBox.style.display = 'none';
+
+          let isValid = true;
+
+          if (name.length < 2) {
+            document.getElementById('err-cnt-name').textContent = 'Please enter your full name.';
+            document.getElementById('err-cnt-name').style.display = 'block';
+            isValid = false;
+          }
+
+          const cleanPhone = phone.replace(/[\s\-\+\(\)]/g, '');
+          if (!/^(?:91)?[6789]\d{9}$/.test(cleanPhone)) {
+            document.getElementById('err-cnt-phone').textContent = 'Enter a valid 10-digit Indian mobile number.';
+            document.getElementById('err-cnt-phone').style.display = 'block';
+            isValid = false;
+          }
+
+          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('err-cnt-email').textContent = 'Enter a valid email address.';
+            document.getElementById('err-cnt-email').style.display = 'block';
+            isValid = false;
+          }
+
+          if (!subject) {
+            document.getElementById('err-cnt-subject').textContent = 'Please select a subject.';
+            document.getElementById('err-cnt-subject').style.display = 'block';
+            isValid = false;
+          }
+
+          if (message.length < 5) {
+            document.getElementById('err-cnt-message').textContent = 'Message must be at least 5 characters.';
+            document.getElementById('err-cnt-message').style.display = 'block';
+            isValid = false;
+          }
+
+          if (!isValid) return;
+
+          // Open WhatsApp with pre-filled enquiry (no database save)
+          const waText = [
+            'Hello Koshti & Company,',
+            '',
+            'I would like to make an enquiry.',
+            '',
+            `*Name:* ${name}`,
+            `*Phone:* ${phone}`,
+            email ? `*Email:* ${email}` : null,
+            `*Service:* ${subject}`,
+            `*Message:* ${message}`
+          ].filter(Boolean).join('\n');
+
+          const openWhatsApp = (waNumber) => {
+            const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+            window.open(url, '_blank');
+            form.reset();
+            successBox.textContent = 'Opening WhatsApp… Please send the message to complete your enquiry.';
+            successBox.style.display = 'block';
+          };
+
+          fetch('/api/config')
+            .then(res => res.json())
+            .then(data => {
+              const wa = (data.config && data.config.whatsapp) || '919876543210';
+              openWhatsApp(wa);
+            })
+            .catch(() => openWhatsApp('919876543210'));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

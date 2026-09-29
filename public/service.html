@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Details | Koshti & Company</title>
+  <meta name="description" content="Factual service details, document requirements, and process roadmap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <a href="/services.html" style="color: var(--accent); font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 0.75rem;">
+        &larr; Back to Services List
+      </a>
+      <span class="badge-tag" id="srv-category-badge" style="background: rgba(255,255,255,0.15); color: #fff; display: block; width: max-content; margin-bottom: 0.5rem;">Category</span>
+      <h1 id="srv-title" style="color: #fff; margin-bottom: 0.5rem;">Service Details</h1>
+    </div>
+  </section>
+
+  <!-- Service Detail Body -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 850px; margin: 0 auto;" id="service-detail-container">
+        <!-- Content dynamically injected -->
+        <p style="text-align: center; color: #64748B;">Loading service details...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('s');
+
+      if (!slug) {
+        window.location.href = '/services.html';
+        return;
+      }
+
+      fetch(`/api/services/${slug}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.success || !data.service) {
+            document.getElementById('service-detail-container').innerHTML = `
+              <h2>Service Not Found</h2>
+              <p>The requested service detail could not be located.</p>
+              <a href="/services.html" class="btn btn-outline">View All Services</a>
+            `;
+            return;
+          }
+
+          const s = data.service;
+          document.title = `${s.title} | Koshti & Company`;
+          document.getElementById('srv-title').textContent = s.title;
+          document.getElementById('srv-category-badge').textContent = s.category;
+
+          const docs = Array.isArray(s.documents_required) ? s.documents_required : [];
+          const steps = Array.isArray(s.process_steps) ? s.process_steps : [];
+
+          const html = `
+            <div style="background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+              <h2 style="margin-bottom: 1rem; font-size: 1.6rem;">What is this service?</h2>
+              <p style="font-size: 1.05rem; line-height: 1.75; color: #334155; margin-bottom: 2rem;">
+                ${s.full_desc}
+              </p>
+
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Who needs this service?</h3>
+              <p style="font-size: 1rem; line-height: 1.6; color: #475569; margin-bottom: 2rem;">
+                ${s.who_needs_it}
+              </p>
+
+              ${docs.length > 0 ? `
+                <div class="checklist-box">
+                  <h4 style="color: var(--primary); font-size: 1.15rem;">Documents Typically Required Checklist</h4>
+                  <ul class="checklist-list">
+                    ${docs.map(d => `<li>${d}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+
+              ${steps.length > 0 ? `
+                <h3 style="font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem;">General Process Workflow</h3>
+                <ol style="padding-left: 1.5rem; margin-bottom: 2.5rem; line-height: 1.8; color: #334155;">
+                  ${steps.map(step => `<li style="margin-bottom: 0.5rem; font-weight: 500;">${step}</li>`).join('')}
+                </ol>
+              ` : ''}
+
+              <div style="background: var(--bg-light); border-top: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                  <strong style="color: var(--primary);">Need specific clarification?</strong><br />
+                  <span style="font-size: 0.9rem; color: var(--secondary);">Contact our registered office in New Ranip for professional inquiries.</span>
+                </div>
+                <a href="/contact.html?subject=${encodeURIComponent(s.title)}" class="btn btn-primary btn-sm">Contact Us Regarding ${s.title}</a>
+              </div>
+            </div>
+          `;
+
+          document.getElementById('service-detail-container').innerHTML = html;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('service-detail-container').innerHTML = `<p style="color:red;">Error loading service details.</p>`;
+        });
+    });
+  </script>
+</body>
+</html>

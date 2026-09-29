@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services Offered | Koshti & Company | Chartered Accountants</title>
+  <meta name="description" content="Explore professional CA services offered by Koshti & Company in Audit, Income Tax Return filing, GST compliance, ROC filing, and Corporate Registrations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .filter-btn {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Page Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <h1 style="color: #fff; margin-bottom: 0.5rem;">Services Offered</h1>
+      <p style="color: #D0DCEB; font-size: 1.05rem;">Factual overview of professional practice areas rendered per ICAI guidelines.</p>
+    </div>
+  </section>
+
+  <!-- Filter & Grid -->
+  <section class="section">
+    <div class="container">
+      <!-- Category Filter -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;" id="category-filters">
+        <button class="filter-btn active" data-cat="All">All Practice Areas</button>
+        <button class="filter-btn" data-cat="Direct Tax">Direct Tax</button>
+        <button class="filter-btn" data-cat="Indirect Tax">GST & Indirect Tax</button>
+        <button class="filter-btn" data-cat="Audit & Assurance">Audit & Assurance</button>
+        <button class="filter-btn" data-cat="Corporate Compliance">Corporate Compliance</button>
+        <button class="filter-btn" data-cat="Advisory">Advisory & Other</button>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid-3" id="services-page-grid">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    let allServices = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/services')
+        .then(res => res.json())
+        .then(data => {
+          allServices = data.services || [];
+          renderServicesGrid('All');
+        });
+
+      // Filter Buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.getAttribute('data-cat');
+          renderServicesGrid(cat);
+        });
+      });
+    });
+
+    function renderServicesGrid(category) {
+      const grid = document.getElementById('services-page-grid');
+      if (!grid) return;
+
+      const filtered = (category === 'All') 
+        ? allServices 
+        : allServices.filter(s => s.category === category);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #64748B;">No services found in this category.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(s => `
+        <div class="card">
+          <div class="card-icon">${getServiceSvgIcon(s.icon)}</div>
+          <span class="badge-tag" style="align-self: flex-start; margin-bottom: 0.75rem;">${s.category}</span>
+          <h3 class="card-title">${s.title}</h3>
+          <p class="card-body">${s.short_desc}</p>
+          <a href="/service.html?s=${s.slug}" class="card-link">
+            Read Service Details 
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

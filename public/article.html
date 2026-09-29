@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article Reader | Koshti & Company</title>
+  <meta name="description" content="Technical article on taxation and compliance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .article-body-content h3 { margin-top: 1.75rem; margin-bottom: 0.75rem; font-size: 1.3rem; }
+    .article-body-content h4 { margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .article-body-content ul, .article-body-content ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .article-body-content li { margin-bottom: 0.4rem; }
+    .article-body-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+    .article-body-content th, .article-body-content td { border: 1px solid var(--border-color); padding: 0.75rem; text-align: left; }
+    .article-body-content th { background: #F1F5F9; color: var(--primary); }
+  </style>
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <a href="/updates.html" style="color: var(--accent); font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 0.75rem;">
+        &larr; Back to Articles & Updates
+      </a>
+      <div style="margin-bottom: 0.5rem;">
+        <span class="badge-tag" id="art-cat" style="background: rgba(255,255,255,0.15); color: #fff;">Category</span>
+        <span id="art-date" style="color: #94A3B8; font-size: 0.85rem; margin-left: 10px;">Date</span>
+      </div>
+      <h1 id="art-title" style="color: #fff; max-width: 900px; margin-bottom: 0.5rem;">Article Title</h1>
+    </div>
+  </section>
+
+  <!-- Article Reader -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+        <div id="art-body-wrapper" class="article-body-content">
+          <p style="text-align: center; color: #64748B;">Loading article text...</p>
+        </div>
+
+        <hr style="margin: 2.5rem 0; border: none; border-top: 1px solid var(--border-color);" />
+
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 1.25rem; border-radius: var(--radius); font-size: 0.85rem; color: #64748B;">
+          <strong>Disclaimer:</strong> The contents of this technical article are intended solely for general educational and informational guidance. They do not constitute formal legal opinion or tax advice. Readers are urged to verify statutory provisions against official government gazette notifications or consult a qualified Chartered Accountant before acting.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('a');
+
+      if (!slug) {
+        window.location.href = '/updates.html';
+        return;
+      }
+
+      fetch(`/api/articles/${slug}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.success || !data.article) {
+            document.getElementById('art-body-wrapper').innerHTML = `
+              <h2>Article Not Found</h2>
+              <p>The requested technical article could not be located.</p>
+              <a href="/updates.html" class="btn btn-outline">Back to Updates</a>
+            `;
+            return;
+          }
+
+          const a = data.article;
+          document.title = `${a.seo_title || a.title} | Koshti & Company`;
+          document.getElementById('art-title').textContent = a.title;
+          document.getElementById('art-cat').textContent = a.category;
+          document.getElementById('art-date').textContent = new Date(a.published_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+          // Simple Markdown to HTML parser for headers, lists, tables
+          let formattedBody = a.body
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+            .replace(/^\* (.*$)/gim, '<li>$1</li>')
+            .replace(/^- (.*$)/gim, '<li>$1</li>')
+            .replace(/\n\n/g, '</p><p>');
+
+          document.getElementById('art-body-wrapper').innerHTML = `<p>${formattedBody}</p>`;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('art-body-wrapper').innerHTML = `<p style="color:red;">Error loading article text.</p>`;
+        });
+    });
+  </script>
+</body>
+</html>

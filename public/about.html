@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Koshti & Company | Chartered Accountants</title>
+  <meta name="description" content="Learn about Koshti & Company, an ICAI registered Chartered Accountant practice in Ranip, Ahmedabad established in 2015." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Page Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <h1 style="color: #fff; margin-bottom: 0.5rem;">About the Firm</h1>
+      <p style="color: #D0DCEB; font-size: 1.05rem;">Factual profile, professional partners, and regulatory compliance standards.</p>
+    </div>
+  </section>
+
+  <!-- Firm Overview -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <h2>Firm Profile</h2>
+        <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          <strong>Koshti & Company</strong> is a Partnership Firm of Chartered Accountants registered with the Institute of Chartered Accountants of India (ICAI) under Firm Registration Number (FRN) <strong>142857W</strong>. Established in 2015, the firm provides structured professional services in the areas of Statutory Audit, Internal Audit, Goods & Services Tax (GST) compliance, Direct Taxation, and Corporate Secretarial filings.
+        </p>
+
+        <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+          Operating from New Ranip, Ahmedabad, the practice serves sole proprietorships, partnership firms, closely-held private companies, and non-resident clients across Gujarat and western India.
+        </p>
+
+        <div style="background: var(--white); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; border: 1px solid var(--border-color); border-left-width: 4px; margin-bottom: 3rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Regulatory & Ethical Standards</h3>
+          <p style="font-size: 0.95rem; color: var(--secondary); margin-bottom: 0;">
+            The firm adheres strictly to the Code of Ethics and professional conduct guidelines mandated by the Council of the Institute of Chartered Accountants of India. Information rendered across all communications is factual and informative, maintaining independence and technical precision.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Partners & Leadership</h2>
+        <p>Qualifications, membership credentials, and key practice areas of firm partners.</p>
+      </div>
+
+      <div class="grid-3" id="about-partners-grid" style="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));">
+        <!-- Dynamically rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/config')
+        .then(res => res.json())
+        .then(data => {
+          const grid = document.getElementById('about-partners-grid');
+          if (!grid) return;
+          const partners = data.config.partners || [];
+          grid.innerHTML = partners.map(p => {
+            const hasPhoto = p.photo && p.photo.trim().length > 0;
+            const avatarHtml = hasPhoto 
+              ? `<img src="${p.photo}" alt="${p.name}" onerror="this.outerHTML='${p.name.replace('CA ', '').charAt(0)}'" />` 
+              : p.name.replace('CA ', '').charAt(0);
+            return `
+              <div class="partner-card">
+                <div class="partner-avatar">${avatarHtml}</div>
+                <div class="partner-info">
+                  <h3>${p.name}</h3>
+                  <div class="partner-meta">${p.qualification} • ICAI Mem No: ${p.membershipNo}</div>
+                  <p style="font-size: 0.95rem; color: #5B6B7F;">${p.bio}</p>
+                </div>
+              </div>
+            `;
+          }).join('');
+        });
+    });
+  </script>
+</body>
+</html>

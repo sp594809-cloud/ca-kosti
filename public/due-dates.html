@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance Due Dates Schedule | Koshti & Company</title>
+  <meta name="description" content="Statutory compliance calendar and due dates schedule for GST returns, Income Tax, TDS, and ROC filings in India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <div id="site-header"></div>
+
+  <!-- Banner -->
+  <section style="background: var(--primary); color: #fff; padding: 3rem 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 style="color: #fff; margin-bottom: 0.5rem;">Statutory Compliance Due Dates</h1>
+          <p style="color: #D0DCEB; font-size: 1.05rem;">Factual due date schedule for Income Tax, GST, TDS, and ROC filing deadlines.</p>
+        </div>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm no-print" style="border-color: rgba(255,255,255,0.4);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Schedule
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content & Table -->
+  <section class="section">
+    <div class="container">
+      <!-- Mandatory Warning Alert -->
+      <div style="background: #FFFBEB; border: 1px solid #FCD34D; border-left: 4px solid #D97706; padding: 1.25rem; border-radius: var(--radius); margin-bottom: 2rem;">
+        <strong style="color: #92400E; font-size: 1rem;">⚠️ Regulatory Verification Notice:</strong>
+        <p style="font-size: 0.92rem; color: #78350F; margin-bottom: 0; margin-top: 0.3rem;">
+          Statutory due dates are subject to change via official notifications issued by the Central Board of Direct Taxes (CBDT), Central Board of Indirect Taxes & Customs (CBIC), and Ministry of Corporate Affairs (MCA). <strong>Dates listed below are sample representations; verify on official portals (<a href="https://www.incometax.gov.in" target="_blank" rel="noopener">incometax.gov.in</a>, <a href="https://www.gst.gov.in" target="_blank" rel="noopener">gst.gov.in</a>, <a href="https://www.mca.gov.in" target="_blank" rel="noopener">mca.gov.in</a>) before relying on them.</strong>
+        </p>
+      </div>
+
+      <!-- Controls: Filter & Search -->
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; margin-bottom: 1.5rem;" class="no-print">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; flex-grow: 1; max-width: 600px;">
+          <input type="text" id="due-search" class="form-control" placeholder="Search compliance (e.g., GSTR-3B, TDS, AOC-4)..." style="flex: 1;" />
+          <select id="due-category" class="form-control" style="width: 200px;">
+            <option value="All">All Categories</option>
+            <option value="GST Compliance">GST Compliance</option>
+            <option value="Direct Tax">Direct Tax</option>
+            <option value="ROC Compliance">ROC Compliance</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="due-table-wrapper">
+        <table class="due-table">
+          <thead>
+            <tr>
+              <th>Compliance Title</th>
+              <th>Due Date</th>
+              <th>Category</th>
+              <th>Description & Details</th>
+              <th>Authority</th>
+              <th>Verification Status</th>
+            </tr>
+          </thead>
+          <tbody id="due-dates-table-body">
+            <!-- Dynamically rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    let allDueDates = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/due-dates')
+        .then(res => res.json())
+        .then(data => {
+          allDueDates = data.dueDates || [];
+          renderDueTable();
+        });
+
+      document.getElementById('due-search').addEventListener('input', renderDueTable);
+      document.getElementById('due-category').addEventListener('change', renderDueTable);
+    });
+
+    function renderDueTable() {
+      const tbody = document.getElementById('due-dates-table-body');
+      if (!tbody) return;
+
+      const q = document.getElementById('due-search').value.toLowerCase().trim();
+      const cat = document.getElementById('due-category').value;
+
+      const filtered = allDueDates.filter(d => {
+        const matchesCat = (cat === 'All' || d.category === cat);
+        const matchesQ = !q || (
+          d.title.toLowerCase().includes(q) ||
+          d.description.toLowerCase().includes(q) ||
+          d.authority.toLowerCase().includes(q)
+        );
+        return matchesCat && matchesQ;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#64748B; padding:2rem;">No matching compliance due dates found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(d => {
+        const dateFormatted = new Date(d.due_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        return `
+          <tr>
+            <td style="font-weight: 600; color: #0B2545;">${d.title}</td>
+            <td style="font-weight: 700; color: #0B2545; white-space: nowrap;">${dateFormatted}</td>
+            <td><span class="badge-tag">${d.category}</span></td>
+            <td>${d.description}</td>
+            <td>${d.authority}</td>
+            <td><span class="badge-verify">${d.verification_status || 'sample, verify'}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
